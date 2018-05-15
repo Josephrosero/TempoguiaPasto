@@ -69,6 +69,9 @@ public class MapboxNavigation extends AppCompatActivity implements LocationEngin
 
     @SuppressWarnings( {"MissingPermission"})
     private void initializeLocationEngine() {
+
+
+        ///////
         locationEngine = new LostLocationEngine(MapboxNavigation.this);
         locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
         locationEngine.activate();
