@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TempoguiaPasto</string>
+    <string name="access_token" translatable="false">pk.eyJ1Ijoiam9zZXBocm9zZXJvIiwiYSI6ImNqaDczODB4MDAwZDgyd285aXBxYTQzeXYifQ.Daooial_Z66yi1ZD8Jr42A</string>
+
 </resources>
