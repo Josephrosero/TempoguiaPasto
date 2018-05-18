@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -18,6 +19,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerOptions;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 
+import com.mapbox.mapboxsdk.style.light.Position;
 import com.mapbox.services.android.navigation.ui.v5.NavigationActivity;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
@@ -29,12 +31,14 @@ import java.util.List;
 
 public class MapboxNavigation extends AppCompatActivity implements LocationEngineListener, PermissionsListener {
 
-     private MapView mapView;
+
+    private MapView mapView;
     private MapboxMap map;
     private PermissionsManager permissionsManager;
     private LocationLayerPlugin locationPlugin;
     private LocationEngine locationEngine;
-    private Location originLocation;
+    public Location originLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,18 +48,38 @@ public class MapboxNavigation extends AppCompatActivity implements LocationEngin
 
         mapView.onCreate(savedInstanceState);
 
+
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
-
-
                 map = mapboxMap;
                 enableLocationPlugin();
+
+                //// marca sanfelipe
+                mapboxMap.addMarker(new MarkerOptions()
+
+                    .position(new LatLng(1.214224, -77.285171))
+                    .title("San Felipe")
+                    .snippet("Templo")
+                );
+
+                mapboxMap.addMarker(new MarkerOptions()
+
+                        .position(new LatLng(1.210920, -77.282167))
+                        .title("Santiago Apostol")
+                        .snippet("Templo")
+                );
+//1.213803, -77.284804
+                mapboxMap.addMarker(new MarkerOptions()
+
+                        .position(new LatLng(1.213803, -77.284804))
+                        .title("Santiago Apostol")
+                        .snippet("Templo")
+                );
 
 
             }
 
-            ;
         });
 
     }
@@ -69,6 +93,7 @@ public class MapboxNavigation extends AppCompatActivity implements LocationEngin
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
             // Create an instance of LOST location engine
             initializeLocationEngine();
+
 
             locationPlugin = new LocationLayerPlugin(mapView, map,locationEngine);
 
